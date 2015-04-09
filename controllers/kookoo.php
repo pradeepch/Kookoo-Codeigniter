@@ -24,9 +24,10 @@ class Kookoo extends CI_Controller {
 		else if($this->input->get('event')=="NewCall")
 		{
 			$this->session->set_userdata('cid',$this->input->get('cid'));
-			$this->Kookoo_CollectDtmf->addPlayText("Welcome to the Orchid Hospitals Helpdesk.  ",$voiceDelay);
-			$this->Kookoo_CollectDtmf->addPlayText("Please select department that you want to raise issue in.   ",$voiceDelay);
-			$this->Kookoo_CollectDtmf->addPlayText("1. for Housekeeping",$voiceDelay);
+			$this->Kookoo_CollectDtmf->addPlayText("Welcome to Sample IVR System.  ",$voiceDelay);
+			$this->Kookoo_CollectDtmf->addPlayText("Please select One of the following options.   ",$voiceDelay);
+			$this->Kookoo_CollectDtmf->addPlayText("1. for Sample1",$voiceDelay);
+			$this->Kookoo_CollectDtmf->addPlayText("2. for Sample2",$voiceDelay);
 			$this->Kookoo_CollectDtmf->setMaxDigits('1');
 			$this->Kookoo_CollectDtmf->setTimeOut($setTimeOut);
 			$this->Kookoo_response->addCollectDtmf($this->Kookoo_CollectDtmf);
@@ -40,12 +41,12 @@ class Kookoo extends CI_Controller {
 					$infoData = array('category' =>(int)$data, 'phone'=> $this->input->get('cid'));
 				//$resultData = createTicket($infoData);
 				if($resultData['result'] = 'success')
-					$this->Kookoo_response->addPlayText('Issue has been raised successfully.',$voiceDelay);
+					$this->Kookoo_response->addPlayText('You have selected Sample1.',$voiceDelay);
 				
 				$this->Kookoo_response->addPlayText('Thank you for calling, have a nice day',$voiceDelay);
 				$this->Kookoo_response->addHangup();
 			}else{
-				$this->Kookoo_CollectDtmf->addPlayText('Invalid input, Press 1 for housekeeping.',$voiceDelay);
+				$this->Kookoo_CollectDtmf->addPlayText('Invalid input, Press 1 for Sample1.',$voiceDelay);
 				$this->Kookoo_CollectDtmf->setMaxDigits('1');
 				$this->Kookoo_response->addCollectDtmf($this->Kookoo_CollectDtmf);
 			}
